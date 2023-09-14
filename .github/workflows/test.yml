@@ -1,0 +1,25 @@
+name: publish
+
+on:
+  - pull_request
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-python@v4
+        with:
+          python-version: '3.7'
+
+      - name: prepare hatch
+        # language=bash
+        run: python3.7 -m pip install hatch
+
+      - name: lint
+        # language=bash
+        run: make lint
+
+      - name: test
+        # language=bash
+        run: make test test-cov

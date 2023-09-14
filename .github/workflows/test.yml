@@ -1,12 +1,10 @@
 name: publish
 
 on:
-  push:
-    branches:
-      - main
+  - pull_request
 
 jobs:
-  publish:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -18,10 +16,10 @@ jobs:
         # language=bash
         run: python3.7 -m pip install hatch
 
-      - name: build
+      - name: lint
         # language=bash
-        run: hatch build
+        run: make lint
 
-      - name: publish
+      - name: test
         # language=bash
-        run: hatch publish --user '__token__' --auth '${{ secrets.PYPI_PUBLISHING_TOKEN }}'
+        run: make test test-cov

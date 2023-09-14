@@ -25,11 +25,11 @@ lint: venv-lint/pyvenv.cfg
 	hatch env run -e lint all
 
 .PHONY: test
-lint: venv-lint/pyvenv.cfg
+test: venv-lint/pyvenv.cfg
 	hatch run test
 
 .PHONY: test-cov
-lint: venv-lint/pyvenv.cfg
+test-cov: venv-lint/pyvenv.cfg
 	hatch run cov
 
 .PHONY: help

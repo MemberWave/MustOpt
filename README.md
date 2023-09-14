@@ -1,2 +1,3 @@
 # MustOpt
-Strongly-typed Optional type for Python
+
+⚡️Robust optional value container

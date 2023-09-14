@@ -18,6 +18,7 @@ path = "venv"
 dependencies = [
     "coverage[toml]>=6.5",
     "pytest",
+    "pyhamcrest",
 ]
 
 [tool.hatch.envs.default.scripts]
@@ -104,7 +105,7 @@ ban-relative-imports = "all"
 "tests/**/*" = ["PLR2004", "S101", "TID252"]
 
 [tool.coverage.run]
-source_pkgs = ["mustopts", "tests"]
+source_pkgs = ["mustopt"]
 branch = true
 parallel = true
 omit = [

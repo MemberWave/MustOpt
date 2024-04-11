@@ -1,0 +1,56 @@
+[version]
+path = "src/mustopt/__about__.py"
+
+[envs.default]
+type = "virtual"
+path = "venv"
+
+[envs.test]
+type = "virtual"
+path = "venv"
+dependencies = [
+  "coverage[toml]",
+  "mypy",
+  "pyhamcrest",
+  "pytest",
+  "ruff",
+]
+
+[[envs.test.matrix]]
+python = ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
+
+[envs.test.scripts]
+test-lint = "ruff check {args:src/mustopt tests}"
+test-pytest = "pytest {args:tests}"
+test-mypy = "mypy --install-types --non-interactive {args:src/mustopt tests}"
+check = [
+  "test-lint",
+  "test-pytest",
+  "test-mypy",
+]
+
+lint-format = "ruff format {args:src/mustopt tests}"
+lint-fix = "ruff check --fix {args:src/mustopt tests}"
+lint = [
+  "lint-format",
+  "lint-fix",
+]
+
+test-coverage = "coverage run -m pytest {args:tests}"
+coverage-report = [
+  "- coverage combine",
+  "coverage report",
+]
+cov = [
+  "test-coverage",
+  "coverage-report",
+]
+
+[build.targets.sdist]
+exclude = [
+    "/.*",
+    "/venv*",
+]
+
+[build.targets.wheel]
+packages = ["src/mustopt"]

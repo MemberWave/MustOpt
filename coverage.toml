@@ -1,0 +1,18 @@
+[tool.coverage.run]
+source_pkgs = ["mustopt"]
+branch = true
+parallel = true
+omit = [
+    "src/mustopt/__about__.py",
+]
+
+[tool.coverage.paths]
+mustopt = ["src/mustopt", "*/mustopt/src/mustopt"]
+tests = ["tests", "*/mustopt/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]

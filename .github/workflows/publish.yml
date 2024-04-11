@@ -1,4 +1,4 @@
-name: publish
+name: Publish MustOpt to PyPi
 
 on:
   push:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   publish:
+    name: Publish MustOpt
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -14,14 +15,17 @@ jobs:
         with:
           python-version: '3.7'
 
-      - name: prepare hatch
+      - name: Install hatch
         # language=bash
-        run: python3.7 -m pip install hatch
+        run: pipx install hatch
 
-      - name: build
+      - name: Build
         # language=bash
         run: hatch build
 
-      - name: publish
+      - name: Publish to PyPi
         # language=bash
-        run: hatch publish --user '__token__' --auth '${{ secrets.PYPI_PUBLISHING_TOKEN }}'
+        run: hatch publish
+        env:
+          HATCH_INDEX_USER: __token__
+          HATCH_INDEX_AUTH: ${{ secrets.PYPI_PUBLISHING_TOKEN }}

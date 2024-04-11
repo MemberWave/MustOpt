@@ -1,21 +1,25 @@
-name: test
+name: Test MustOpt
 
 on:
   - pull_request
 
 jobs:
   test:
+    name: Test MustOpt on Python ${{ matrix.python-version }}
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11", "3.12"]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-python@v4
         with:
-          python-version: '3.7'
+          python-version: ${{ matrix.python-version }}
 
-      - name: prepare hatch
+      - name: Install hatch
         # language=bash
-        run: python3.7 -m pip install hatch
+        run: pipx install hatch
 
-      - name: test
+      - name: Run tests
         # language=bash
-        run: hatch run test:check
+        run: hatch run +py=${{ matrix.python-version }} test:check

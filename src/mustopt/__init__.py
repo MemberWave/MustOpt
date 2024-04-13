@@ -1,8 +1,12 @@
-"""Robust optional container module."""
+"""MustOpt, a robust optional container package."""
 
-from .model import InvalidContainerError, MustOpt
+from ._container import MustOpt
+from ._errors import InvalidContainerError, InvalidValueTypeError, TypeNotSetError, ValueNotSetError
 
 __all__ = [
     'InvalidContainerError',
+    'InvalidValueTypeError',
     'MustOpt',
+    'TypeNotSetError',
+    'ValueNotSetError',
 ]

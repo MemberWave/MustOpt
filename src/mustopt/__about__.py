@@ -1,3 +1,3 @@
-"""Robust optional container."""
+"""MustOpt, a robust optional container."""
 
-__version__ = '0.1.4'
+__version__ = '1.0.1'
